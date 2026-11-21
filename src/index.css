@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #fdf9ee;
+  --color-surface-dim: #dddacf;
+  --color-surface-bright: #fdf9ee;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f7f3e8;
+  --color-surface-container: #f2eee3;
+  --color-surface-container-high: #ece8dd;
+  --color-surface-container-highest: #e6e2d7;
+  --color-on-surface: #1c1c15;
+  --color-on-surface-variant: #434842;
+  --color-primary: #152c1b;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #2b4230;
+  --color-on-primary-container: #94ae97;
+  --color-primary-fixed: #ceead0;
+  --color-primary-fixed-dim: #b3cdb5;
+  --color-secondary: #7c5800;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #febf39;
+  --color-secondary-fixed: #ffdea7;
+  --color-secondary-fixed-dim: #fbbc37;
+  --color-on-secondary-fixed: #271900;
+  --color-on-secondary-fixed-variant: #5e4200;
+  --color-tertiary: #491700;
+  --color-tertiary-container: #6d2600;
+  --color-on-tertiary-container: #fe8751;
+  --color-pitch-black: #111111;
+  --color-ink-dark: #141414;
+  --color-archival-cream: #F3EFE4;
+  --color-card-cream: #FAF7F0;
+  --color-frame-sand: #E6DFD1;
+  --color-ochre-gold: #C88A16;
+
+  --font-serif-editorial: "Playfair Display", Georgia, serif;
+  --font-sans-editorial: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans-editorial);
+    overscroll-behavior-y: none;
+  }
+}
+
+.font-editorial {
+  font-family: var(--font-serif-editorial);
+}
+
+.font-body-sans {
+  font-family: var(--font-sans-editorial);
+}
+
+/* Subtle archival paper-grain texture for cream poster surfaces */
+.paper-grain {
+  position: relative;
+}
+
+.paper-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  z-index: 0;
+}
+
+.paper-grain > * {
+  position: relative;
+  z-index: 1;
+}
+
+.text-outline-hero {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(243, 239, 228, 0.42);
+}
+
+.text-outline-resume {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(243, 239, 228, 0.28);
+}
+
+.card-editorial {
+  border: 2px solid #141414;
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-editorial:hover {
+  transform: translateY(-6px);
+  box-shadow: 6px 6px 0 #2B4230;
+}
+
+@keyframes gentle-bob {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -4px);
+  }
+}
+
+.scroll-badge-bob:hover {
+  animation: gentle-bob 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .card-editorial,
+  .card-editorial:hover,
+  .scroll-badge-bob:hover {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
